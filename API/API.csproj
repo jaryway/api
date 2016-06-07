@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EA9C0F0D-703F-484D-AD4B-A16F0A8B71AE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>API</RootNamespace>
+    <AssemblyName>API</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\API.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\API.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Gma.QrCodeNet.Encoding">
+      <HintPath>..\packages\QrCode.Net.0.4.0.0\lib\net40\Gma.QrCodeNet.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enums\APIType.cs" />
+    <Compile Include="Caching\CacheManager.cs" />
+    <Compile Include="Enums\ChatType.cs" />
+    <Compile Include="Enums\MediaType.cs" />
+    <Compile Include="Enums\ReceiveEventType.cs" />
+    <Compile Include="Enums\ReceiveMessageType.cs" />
+    <Compile Include="Enums\ResponseMessageType.cs" />
+    <Compile Include="Enums\SendMessageType.cs" />
+    <Compile Include="Helpers\Cryptography.cs" />
+    <Compile Include="Helpers\CryptoHelper.cs" />
+    <Compile Include="Helpers\CryptoRandom.cs" />
+    <Compile Include="Helpers\DingTalkCrypt.cs" />
+    <Compile Include="Helpers\HttpHelper.cs" />
+    <Compile Include="Helpers\JsonHelper.cs" />
+    <Compile Include="Helpers\NonceHelper.cs" />
+    <Compile Include="Helpers\PaySignHelper.cs" />
+    <Compile Include="Helpers\QrCodeHelper.cs" />
+    <Compile Include="Helpers\SignHelper.cs" />
+    <Compile Include="Helpers\WXBizMsgCrypt.cs" />
+    <Compile Include="Helpers\XmlHelper.cs" />
+    <Compile Include="APIHelper.cs" />
+    <Compile Include="IAPIHelper.cs" />
+    <Compile Include="IJsonResult.cs" />
+    <Compile Include="IRequest.cs" />
+    <Compile Include="IXmlResult.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\ILoggerFactoryAdapter.cs" />
+    <Compile Include="Logging\Log4Net\Log4NetLogger.cs" />
+    <Compile Include="Logging\Log4Net\Log4NetLoggerFactoryAdapter.cs" />
+    <Compile Include="Logging\LoggerExtension.cs" />
+    <Compile Include="Logging\LoggerFactory.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="Logging\Null\NullLogger.cs" />
+    <Compile Include="Logging\Null\NullLoggerFactoryAdapter.cs" />
+    <Compile Include="Messages\EncryptMessage.cs" />
+    <Compile Include="Messages\IReceiveMessage.cs" />
+    <Compile Include="Messages\IResponseMessage.cs" />
+    <Compile Include="Messages\ReceiveMessageBase.cs" />
+    <Compile Include="Messages\ReceiveMessageEventBase.cs" />
+    <Compile Include="Messages\ReceiveMessageGeneralBase.cs" />
+    <Compile Include="Messages\ReceiveMessageGenerals.cs" />
+    <Compile Include="Messages\ReceiveMessagesEvents.cs" />
+    <Compile Include="Messages\ResponseMessage.cs" />
+    <Compile Include="Models\Models.cs" />
+    <Compile Include="Models\PostMedia.cs" />
+    <Compile Include="Mp\Extensions\MpTokenManagerExtensions.cs" />
+    <Compile Include="Mp\Extensions\MpAPIHelperExtensions.cs" />
+    <Compile Include="Mp\Messages\AddTemplateResult.cs" />
+    <Compile Include="Mp\Messages\CreateGroupResult.cs" />
+    <Compile Include="Mp\Messages\GetAccessTokenResult.cs" />
+    <Compile Include="Mp\Messages\GetCallbackIPResult.cs" />
+    <Compile Include="Mp\Messages\GetGroupIdByOpenIdResult.cs" />
+    <Compile Include="Mp\Messages\GetGroupListResult.cs" />
+    <Compile Include="Mp\Messages\GetKFListResult.cs" />
+    <Compile Include="Mp\Messages\GetMassMessageResult.cs" />
+    <Compile Include="Mp\Messages\GetMediaResult.cs" />
+    <Compile Include="Mp\Messages\GetShortUrlResult.cs" />
+    <Compile Include="Mp\Messages\GetUserInfoResult.cs" />
+    <Compile Include="Mp\Messages\GetUserListResult.cs" />
+    <Compile Include="Mp\Messages\SendKFMessageRequest.cs" />
+    <Compile Include="Mp\Messages\SendMassMessageResult.cs" />
+    <Compile Include="Mp\Messages\SendTemplateMessageRequest.cs" />
+    <Compile Include="Mp\Messages\SendTemplateMessageResult.cs" />
+    <Compile Include="Mp\Messages\UploadMediaNewsRequest.cs" />
+    <Compile Include="Mp\Messages\UploadMediaNewsResult.cs" />
+    <Compile Include="Mp\Messages\UploadMediaRequest.cs" />
+    <Compile Include="Mp\Messages\UploadMediaResult.cs" />
+    <Compile Include="Mp\Models\Group.cs" />
+    <Compile Include="Mp\Models\KFMessage.cs" />
+    <Compile Include="Mp\MpHelper.cs" />
+    <Compile Include="Mp\MpResult.cs" />
+    <Compile Include="Mp\MpTokenManager.cs" />
+    <Compile Include="Mp\Open\ComponentHelper.cs" />
+    <Compile Include="Mp\Open\Messages\GetAuthorizerInfoResult.cs" />
+    <Compile Include="Mp\Open\Messages\GetAuthorizerOptionResult.cs" />
+    <Compile Include="Mp\Open\Messages\GetComponentAccessTokenResult.cs" />
+    <Compile Include="Mp\Open\Messages\GetComponentPreAuthCodeResult.cs" />
+    <Compile Include="Mp\Open\Messages\GetSNSAccessTokenResult.cs" />
+    <Compile Include="Mp\Open\Messages\GetUserInfoResult.cs" />
+    <Compile Include="Mp\Open\Messages\QueryComponentAuthResult.cs" />
+    <Compile Include="Mp\Open\Messages\RefreshAuthorizerTokenResult.cs" />
+    <Compile Include="Mp\Open\Messages\RefreshSNSAccessTokenResult.cs" />
+    <Compile Include="Mp\Open\Messages\SetAuthorizerOptionResult.cs" />
+    <Compile Include="Mp\Open\Models\funcscope_category.cs" />
+    <Compile Include="Mp\Open\MpOpenHelperExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="JsonResult.cs" />
+    <Compile Include="Qy\DingtalkQyAPIHelper.cs" />
+    <Compile Include="Qy\DingtalkQyTokenManager.cs" />
+    <Compile Include="Qy\Messages\GetAgentQyResult.cs" />
+    <Compile Include="Qy\Messages\SetAgentQyRequest.cs" />
+    <Compile Include="Qy\QyAPIHelperExtensionsForWeixin.cs" />
+    <Compile Include="Qy\ThirdAuth\Dingtalk\QyAPIHelperForDingtalkExtensions.cs" />
+    <Compile Include="Qy\Extensions\QyTokenManagerExtensions.cs" />
+    <Compile Include="Qy\Extensions\QyAPIHelperExtensions.cs" />
+    <Compile Include="Qy\IQyTokenManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Qy\Messages\GetUserSimpleListResult.cs" />
+    <Compile Include="Qy\Models\ChatInfo.cs" />
+    <Compile Include="Qy\Messages\GetChatResult.cs" />
+    <Compile Include="Qy\Messages\SetMuteChatResult.cs" />
+    <Compile Include="Qy\Messages\UpdateChatRequest.cs" />
+    <Compile Include="Qy\Messages\CreateChatRequest.cs" />
+    <Compile Include="Qy\Models\ChatReceiver.cs" />
+    <Compile Include="Qy\Messages\SendChatRequest.cs" />
+    <Compile Include="Qy\Models\SetMuteChatInfo.cs" />
+    <Compile Include="Qy\Models\UserInfo.cs" />
+    <Compile Include="Qy\ThirdAuth\Extensions\ThirdAuthTokenManagerExtensions.cs" />
+    <Compile Include="Qy\ThirdAuth\Messages\GetAgentRequest.cs" />
+    <Compile Include="Qy\ThirdAuth\Messages\GetAgentResult.cs" />
+    <Compile Include="Qy\ThirdAuth\Messages\GetAuthInfoRequest.cs" />
+    <Compile Include="Qy\ThirdAuth\Messages\GetAuthInfoResult.cs" />
+    <Compile Include="Qy\ThirdAuth\Messages\GetCorpTokenRequest.cs" />
+    <Compile Include="Qy\ThirdAuth\Messages\GetCorpTokenResult.cs" />
+    <Compile Include="Qy\ThirdAuth\Messages\GetPermanentCodeRequest.cs" />
+    <Compile Include="Qy\ThirdAuth\Messages\GetPermanentCodeResult.cs" />
+    <Compile Include="Qy\ThirdAuth\Messages\GetPreAuthCodeReqeust.cs" />
+    <Compile Include="Qy\ThirdAuth\Messages\GetPreAuthCodeResult.cs" />
+    <Compile Include="Qy\ThirdAuth\Messages\GetSuiteTokenRequest.cs" />
+    <Compile Include="Qy\ThirdAuth\Messages\GetSuiteTokenResult.cs" />
+    <Compile Include="Qy\ThirdAuth\Messages\SetAgentRequest.cs" />
+    <Compile Include="Qy\ThirdAuth\Messages\SetAgentResult.cs" />
+    <Compile Include="Qy\ThirdAuth\Model\AuthAgent.cs" />
+    <Compile Include="Qy\ThirdAuth\Model\AuthCorpInfo.cs" />
+    <Compile Include="Qy\ThirdAuth\Model\AuthDepartment.cs" />
+    <Compile Include="Qy\ThirdAuth\Model\AuthInfo.cs" />
+    <Compile Include="Qy\ThirdAuth\Model\AuthUserInfo.cs" />
+    <Compile Include="Qy\ThirdAuth\Weixin\QyAPIHelperForWeixinExtensions.cs" />
+    <Compile Include="Qy\WeixinQyAPIHelper.cs" />
+    <Compile Include="Qy\IQyHelper.cs" />
+    <Compile Include="Qy\Messages\AddTagUsersRequest.cs" />
+    <Compile Include="Qy\Messages\AddTagUsersResult.cs" />
+    <Compile Include="Qy\Messages\ConvertOpenIdToUserIdResult.cs" />
+    <Compile Include="Qy\Messages\ConvertUserIdToOpenIdResult.cs" />
+    <Compile Include="Qy\Messages\CreateDepartmentRequest.cs" />
+    <Compile Include="Qy\Messages\CreateDepartmentResult.cs" />
+    <Compile Include="Qy\Messages\CreateTagRequest.cs" />
+    <Compile Include="Qy\Messages\CreateTagResult.cs" />
+    <Compile Include="Qy\Messages\CreateUserRequest.cs" />
+    <Compile Include="Qy\Messages\DeleteTagUsersResult.cs" />
+    <Compile Include="Qy\Messages\GetAccessTokenResult.cs" />
+    <Compile Include="Qy\Messages\GetDepartmentResult.cs" />
+    <Compile Include="Qy\Messages\GetJsapiTicketResult.cs" />
+    <Compile Include="Qy\Messages\GetLoginInfoResult.cs" />
+    <Compile Include="Qy\Messages\GetMediaResult.cs" />
+    <Compile Include="Qy\Messages\GetProviderTokenRequest.cs" />
+    <Compile Include="Qy\Messages\GetProviderTokenResult.cs" />
+    <Compile Include="Qy\Messages\GetTagUserResult.cs" />
+    <Compile Include="Qy\Messages\GetUserListResult.cs" />
+    <Compile Include="Qy\Messages\GetUserResult.cs" />
+    <Compile Include="Qy\Messages\OAuthAuthorizeResult.cs" />
+    <Compile Include="Qy\Messages\OAuthGetUserInfoResult.cs" />
+    <Compile Include="Qy\Messages\SendMessageRequest.cs" />
+    <Compile Include="Qy\Messages\SendMessageResult.cs" />
+    <Compile Include="Qy\Messages\UpdateTagRequest.cs" />
+    <Compile Include="Qy\Messages\UpdateUserRequest.cs" />
+    <Compile Include="Qy\Messages\UploadMediaRequest.cs" />
+    <Compile Include="Qy\Messages\UploadMediaResult.cs" />
+    <Compile Include="Qy\Models\UserExtensionAttribute.cs" />
+    <Compile Include="Qy\Models\UserExtensionAttributeItem.cs" />
+    <Compile Include="Qy\Models\UserSimple.cs" />
+    <Compile Include="Qy\Models\WeixinDepartment.cs" />
+    <Compile Include="Qy\QyResult.cs" />
+    <Compile Include="Qy\WeixinQyTokenManager.cs" />
+    <Compile Include="TokenManager.cs" />
+    <Compile Include="WeixinPay\Extensions\WeixinPayAPIHelperExtensions.cs" />
+    <Compile Include="WeixinPay\Messages\UnifiedOrderRequest.cs" />
+    <Compile Include="WeixinPay\Messages\UnifiedOrderResult.cs" />
+    <Compile Include="WeixinPay\Models\Signable.cs" />
+    <Compile Include="WeixinPay\WeixinPayHelper.cs" />
+    <Compile Include="WeixinPay\WeixinPayResult.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
