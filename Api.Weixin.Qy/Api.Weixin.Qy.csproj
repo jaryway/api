@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FC777C90-D82B-473E-88B2-96D8E1B6BBFB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Api.Weixin.Qy</RootNamespace>
+    <AssemblyName>Api.Weixin.Qy</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\net40\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\net40\Api.Weixin.Qy.xml</DocumentationFile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\net40\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\net40\Api.Weixin.Qy.xml</DocumentationFile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-net45|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\net45\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\net45\Api.Weixin.Qy.xml</DocumentationFile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-net45|AnyCPU'">
+    <OutputPath>bin\Release\net45\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Release\net45\Api.Weixin.Qy.xml</DocumentationFile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='Release'">
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)'=='Debug-net45' Or '$(Configuration)'=='Release-net45'">
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Api.Core, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Qianyun.Api.Core.1.1.0\lib\net40\Api.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiHelper.cs" />
+    <Compile Include="Messages\AddTagMembersRequest.cs" />
+    <Compile Include="Messages\AddTagMembersResult.cs" />
+    <Compile Include="Messages\ConvertOpenIdToUserIdResult.cs" />
+    <Compile Include="Messages\ConvertUserIdToOpenIdResult.cs" />
+    <Compile Include="Messages\CreateChatRequest.cs" />
+    <Compile Include="Messages\CreateDepartmentRequest.cs" />
+    <Compile Include="Messages\CreateDepartmentResult.cs" />
+    <Compile Include="Messages\CreateTagRequest.cs" />
+    <Compile Include="Messages\CreateTagResult.cs" />
+    <Compile Include="Messages\CreateUserRequest.cs" />
+    <Compile Include="Messages\DeleteTagUsersResult.cs" />
+    <Compile Include="Messages\GetAccessTokenResult.cs" />
+    <Compile Include="Messages\GetAgentListResult.cs" />
+    <Compile Include="Messages\GetAgentResult.cs" />
+    <Compile Include="Messages\GetChatResult.cs" />
+    <Compile Include="Messages\GetDepartmentResult.cs" />
+    <Compile Include="Messages\GetJsapiTicketResult.cs" />
+    <Compile Include="Messages\GetLoginInfoResult.cs" />
+    <Compile Include="Messages\GetMediaResult.cs" />
+    <Compile Include="Messages\GetProviderTokenRequest.cs" />
+    <Compile Include="Messages\GetProviderTokenResult.cs" />
+    <Compile Include="Messages\GetTagUserResult.cs" />
+    <Compile Include="Messages\GetUserListResult.cs" />
+    <Compile Include="Messages\GetUserResult.cs" />
+    <Compile Include="Messages\GetUserSimpleListResult.cs" />
+    <Compile Include="Messages\OAuthAuthorizeResult.cs" />
+    <Compile Include="Messages\OAuthGetUserInfoResult.cs" />
+    <Compile Include="Messages\SendChatRequest.cs" />
+    <Compile Include="Messages\SendMessageRequest.cs" />
+    <Compile Include="Messages\SendMessageResult.cs" />
+    <Compile Include="Messages\SetAgentRequest.cs" />
+    <Compile Include="Messages\SetMuteChatResult.cs" />
+    <Compile Include="Messages\UpdateChatRequest.cs" />
+    <Compile Include="Messages\UpdateTagRequest.cs" />
+    <Compile Include="Messages\UpdateUserRequest.cs" />
+    <Compile Include="Messages\UploadMediaRequest.cs" />
+    <Compile Include="Messages\UploadMediaResult.cs" />
+    <Compile Include="Models\AgentInfo.cs" />
+    <Compile Include="Models\ChatInfo.cs" />
+    <Compile Include="Models\ChatReceiver.cs" />
+    <Compile Include="Models\SetMuteChatInfo.cs" />
+    <Compile Include="Models\UserExtensionAttribute.cs" />
+    <Compile Include="Models\UserExtensionAttributeItem.cs" />
+    <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Models\UserSimple.cs" />
+    <Compile Include="Models\Department.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThirdAuth\Messages\GetAuthInfoRequest.cs" />
+    <Compile Include="ThirdAuth\Messages\GetAuthInfoResult.cs" />
+    <Compile Include="ThirdAuth\Messages\GetCorpTokenRequest.cs" />
+    <Compile Include="ThirdAuth\Messages\GetCorpTokenResult.cs" />
+    <Compile Include="ThirdAuth\Messages\GetPermanentCodeRequest.cs" />
+    <Compile Include="ThirdAuth\Messages\GetPermanentCodeResult.cs" />
+    <Compile Include="ThirdAuth\Messages\GetPreAuthCodeReqeust.cs" />
+    <Compile Include="ThirdAuth\Messages\GetPreAuthCodeResult.cs" />
+    <Compile Include="ThirdAuth\Messages\GetSuiteTokenRequest.cs" />
+    <Compile Include="ThirdAuth\Messages\GetSuiteTokenResult.cs" />
+    <Compile Include="ThirdAuth\Messages\SetSessionInfoRequest.cs" />
+    <Compile Include="ThirdAuth\Messages\SyncGetPageResult.cs" />
+    <Compile Include="ThirdAuth\Models\AuthAgent.cs" />
+    <Compile Include="ThirdAuth\Models\AuthCorpInfo.cs" />
+    <Compile Include="ThirdAuth\Models\AuthDepartment.cs" />
+    <Compile Include="ThirdAuth\Models\AuthInfo.cs" />
+    <Compile Include="ThirdAuth\Models\AuthUserInfo.cs" />
+    <Compile Include="ThirdAuth\ThirdAuthApiHelperExtensions.cs" />
+    <Compile Include="ThirdAuth\ThirdAuthTokenManagerExtensions.cs" />
+    <Compile Include="TokenManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

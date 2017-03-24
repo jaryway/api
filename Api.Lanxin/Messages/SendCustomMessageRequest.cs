@@ -42,11 +42,11 @@ namespace Api.Lanxin.Messages
         private string _msgtype = "text";
         #endregion
         /// <summary>
-        /// 接收方帐号
+        /// 
         /// </summary>
         public string touser { get; set; }
         /// <summary>
-        /// 消息类型
+        /// 
         /// </summary>
         public string msgtype
         {
@@ -79,7 +79,7 @@ namespace Api.Lanxin.Messages
         /// <summary>
         /// 附件消息 支持图片、音频、视频、office文件等附件消息。msgtype = "attachment"
         /// </summary>
-        public Attachment attachment
+        public Attachment Attachment
         {
             get { return _attachment; }
             set

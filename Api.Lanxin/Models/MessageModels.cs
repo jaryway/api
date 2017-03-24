@@ -170,11 +170,8 @@ namespace Api.Lanxin.Models
         /// </summary>
         public int type { get; set; }
         /// <summary>
-        /// int类型：0 默认值，可以不传；1. 访问link的时候增加name和telephone要求以_ckey为可以传递。例如:http://host/path/uri?_ckey=base64(name=name&amp;telephone=telephon)
+        /// int类型：0 默认值，可以不传；1. 访问link的时候增加name和telephone要求以_ckey为可以传递。例如：http://host/path/uri?_ckey=base64(name=name&telephone=telephon)
         /// </summary>
-        /// <example>
-        /// <![CDATA[http://host/path/uri?_ckey=base64(name=name&telephone=telephon)]]>
-        /// </example>
         public int flag { get; set; }
     }
 

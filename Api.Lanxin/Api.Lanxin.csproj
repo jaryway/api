@@ -33,16 +33,16 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Api.Lanxin.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\..\..\libs\Packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,11 +52,8 @@
   <ItemGroup>
     <Compile Include="ApiHelper.cs" />
     <Compile Include="Enums\MediaType.cs" />
-    <Compile Include="Helpers\CryptoHelper.cs" />
-    <Compile Include="Helpers\CryptoRandom.cs" />
     <Compile Include="Helpers\HttpHelper.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
-    <Compile Include="Helpers\SignHelper.cs" />
     <Compile Include="Helpers\XmlHelper.cs" />
     <Compile Include="JsonResult.cs" />
     <Compile Include="Logging\ILogger.cs" />
@@ -68,13 +65,11 @@
     <Compile Include="Logging\LogLevel.cs" />
     <Compile Include="Logging\Null\NullLogger.cs" />
     <Compile Include="Logging\Null\NullLoggerFactoryAdapter.cs" />
-    <Compile Include="Messages\GetSnsOAuthAccessTokenResult.cs" />
     <Compile Include="Messages\ControlMessageResult.cs" />
     <Compile Include="Messages\GetAccessTokenResult.cs" />
     <Compile Include="Messages\GetMediaResult.cs" />
     <Compile Include="Messages\GetMemberResult.cs" />
     <Compile Include="Messages\GetParentStructResult.cs" />
-    <Compile Include="Messages\GetSnsUserInfoResult.cs" />
     <Compile Include="Messages\SendCustomMessageRequest.cs" />
     <Compile Include="Messages\SendMassMessageRequest.cs" />
     <Compile Include="Messages\SendMessageResult.cs" />
@@ -84,7 +79,9 @@
     <Compile Include="Models\PostMedia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
