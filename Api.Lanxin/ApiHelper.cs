@@ -38,7 +38,7 @@ namespace Api.Lanxin
         /// </summary>
         /// <param name="baseurl"></param>
         /// <returns></returns>
-        public static ApiHelper Instance(string baseurl)
+        public ApiHelper Instance(string baseurl)
         {
             return new ApiHelper(baseurl);
         }
@@ -58,7 +58,6 @@ namespace Api.Lanxin
             var url = string.Format("{0}/cgi-bin/token?grant_type={1}&appid={2}&secret={3}", BaseUrl, grant_type, appid, appsecret);
             return HttpHelper.Get<GetAccessTokenResult>(url);
         }
-
         #endregion
 
         #region 上传下载多媒体文件
@@ -201,44 +200,6 @@ namespace Api.Lanxin
             return JsonHelper.Decode<JsonResult>(result);
         }
 
-        #endregion
-
-        #region sns OAuth2.0
-        /// <summary>
-        /// OAuth2.0登录授权
-        /// </summary>
-        /// <param name="code"></param>
-        /// <param name="appid"></param>
-        /// <param name="grant_type"></param>
-        public GetSnsOAuthAccessTokenResult GetSnsOAuthAccessToken(string code, int appid, string grant_type = "authorization_code")
-        {
-            var url = string.Format("{0}/sns/oauth2/access_token?code={1}&appid={2}&grant_type={3}", BaseUrl, code, appid, grant_type);
-            return HttpHelper.Get<GetSnsOAuthAccessTokenResult>(url);
-        }
-
-        /// <summary>
-        /// OAuth2.0获取用户信息
-        /// </summary>
-        /// <param name="access_token"></param>
-        /// <param name="mobile">用户的唯一标识（openid ）</param>
-        /// <returns></returns>
-        public GetSnsUserInfoResult GetSnsUserInfo(string access_token, string mobile)
-        {
-            var url = string.Format("{0}/sns/userinfo?access_token={1}&mobile={2}", BaseUrl, access_token, mobile);
-            return HttpHelper.Get<GetSnsUserInfoResult>(url);
-        }
-
-        ///// <summary>
-        ///// OAuth2.0获取用户信息
-        ///// </summary>
-        ///// <param name="access_token"></param>
-        ///// <param name="mobile">用户的唯一标识（openid ）</param>
-        ///// <returns></returns>
-        //public GetSnsUserInfoResult GetSnsUserInfo(string access_token, string mobile)
-        //{
-        //    var url = string.Format("{0}/lop/photo/res/show? access_token=ACCESS_TOKEN", BaseUrl, access_token, mobile);
-        //    return HttpHelper.Get<GetSnsUserInfoResult>(url);
-        //}
         #endregion
 
     }

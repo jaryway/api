@@ -1,6 +1,8 @@
 ﻿
+using Api.Lanxin.Helpers;
 using Api.Lanxin.Logging;
 using Api.Lanxin.Models;
+using LogNet.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -41,11 +43,9 @@ namespace Api.Lanxin.Helpers
             /// <param name="data">待提交的数据</param>
             /// <param name="url">提交的地址</param>
             /// <returns></returns>
-            public static TResult GetJsonResult<T, TResult>(string url, T data)
-                where T : class
-                where TResult : class
+            public static TResult GetJsonResult<T, TResult>(string url, T data) where TResult : class
             {
-                var result = GetResult(url, JsonHelper.Encode(data));
+                var result = GetResult(JsonHelper.Encode(data), url);
                 return JsonHelper.Decode<TResult>(result);
             }
             #endregion
@@ -164,13 +164,13 @@ namespace Api.Lanxin.Helpers
                     {
                         result = reader.ReadToEnd();
                     }
-                    Encoding encoding = Encoding.GetEncoding(REQUESTENCODING);
-                    LoggerFactory.GetLogger().Debug(string.Format("HttpPost-{0},result:{1},data:{2}", url, result, encoding.GetString(data)));
                     return result;
                 }
                 catch (Exception ex)
                 {
-                    LoggerFactory.GetLogger().Error(ex, string.Format("HttpPost发生错误:{0}", url));
+                    var log = new Log4Neter();
+
+                    Log.Error(ex, "", "");
                     throw ex;
                 }
             }
@@ -213,46 +213,38 @@ namespace Api.Lanxin.Helpers
             /// <returns></returns>
             public static string GetFileResult(string url, byte[] data)
             {
-                try
+                var responseContent = string.Empty;
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
+                if (request == null)
                 {
-                    var responseContent = string.Empty;
-                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                    var msg = string.Format("Invalid url string: {0}", url);
+                    throw new ApplicationException(msg);
+                }
 
-                    if (request == null)
-                    {
-                        var msg = string.Format("Invalid url string: {0}", url);
-                        throw new ApplicationException(msg);
-                    }
+                request.UserAgent = USERAGENT;
+                request.Method = "POST";
+                request.ContentType = "multipart/form-data; boundary=" + BOUNDARY;
+                request.KeepAlive = true;
+                request.Credentials = CredentialCache.DefaultCredentials;
+                request.ContentLength = data.Length;
+                Stream requestStream = request.GetRequestStream();
+                requestStream.Write(data, 0, data.Length);
+                requestStream.Close();
 
-                    request.UserAgent = USERAGENT;
-                    request.Method = "POST";
-                    request.ContentType = "multipart/form-data; boundary=" + BOUNDARY;
-                    request.KeepAlive = true;
-                    request.Credentials = CredentialCache.DefaultCredentials;
-                    request.ContentLength = data.Length;
-                    Stream requestStream = request.GetRequestStream();
-                    requestStream.Write(data, 0, data.Length);
-                    requestStream.Close();
-
-                    var response = request.GetResponse();
-                    if (response == null)
-                        return responseContent;
-
-                    using (Stream stream = response.GetResponseStream())
-                    {
-                        StreamReader reader = new StreamReader(stream, Encoding.GetEncoding(RESPONSEENCODING));
-                        responseContent = reader.ReadToEnd();
-                        reader.Dispose();
-                    }
-                    response.Close();
-                    LoggerFactory.GetLogger().Debug(string.Format("HttpPost-GetFileResult-{0},result:{1}", url, responseContent));
+                var response = request.GetResponse();
+                if (response == null)
                     return responseContent;
-                }
-                catch (Exception ex)
+
+                using (Stream stream = response.GetResponseStream())
                 {
-                    LoggerFactory.GetLogger().Error(string.Format("HttpPost-GetFileResult发生错误-{0}", url));
-                    throw ex;
+                    StreamReader reader = new StreamReader(stream, Encoding.GetEncoding(RESPONSEENCODING));
+                    responseContent = reader.ReadToEnd();
+                    reader.Dispose();
                 }
+                response.Close();
+
+                return responseContent;
             }
             #endregion
 
@@ -294,8 +286,7 @@ namespace Api.Lanxin.Helpers
             /// <typeparam name="TResult"></typeparam>
             /// <param name="url"></param>
             /// <returns></returns>
-            public static TResult GetJsonResult<TResult>(string url)
-                where TResult : class
+            public static TResult GetJsonResult<TResult>(string url) where TResult : class
             {
                 var result = GetResult(url);
                 return JsonHelper.Decode<TResult>(result.Content);
@@ -330,71 +321,63 @@ namespace Api.Lanxin.Helpers
             /// <returns></returns>
             public static ResponseData GetResult(string url)
             {
-                try
+                ResponseData data = new ResponseData();
+                string responseContent = string.Empty;
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.Timeout = 10000;
+                var response = request.GetResponse();
+                if (response == null)
+                    return data;
+
+                var contentType = response.ContentType.ToLower().Split(new char[] { ';' })[0];
+
+                //是文本类型直接返回
+                string[] contentTypes = { "application/json", "text/xml", "text/html", "text/plain" };
+                if (contentTypes.Contains(contentType))
                 {
-                    ResponseData data = new ResponseData();
-                    string responseContent = string.Empty;
-                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                    request.Timeout = 10000;
-                    var response = request.GetResponse();
-                    if (response == null)
-                        return data;
-
-                    var contentType = response.ContentType.ToLower().Split(new char[] { ';' })[0];
-
-                    //是文本类型直接返回
-                    string[] contentTypes = { "application/json", "text/xml", "text/html", "text/plain" };
-                    if (contentTypes.Contains(contentType))
+                    using (Stream stream = response.GetResponseStream())
                     {
-                        using (Stream stream = response.GetResponseStream())
-                        {
-                            StreamReader reader = new StreamReader(stream, Encoding.GetEncoding(REQUESTENCODING));
-                            data.Content = reader.ReadToEnd();
-                            reader.Dispose();
-                        }
-
-                        LoggerFactory.GetLogger().Debug(string.Format("HttpGet-{0}:{1}", url, data.Content));
-
-                        return data;
-                    }
-                    //文件类型，处理文件
-                    Dictionary<string, string> dic = new Dictionary<string, string>();
-                    foreach (var key in response.Headers.AllKeys)
-                    {
-                        string _key = key.ToLower();
-                        var k = _key.Replace("-", "");
-                        //获取文件 content-disposition，主要用户Get时获取filename
-                        if (_key == "content-disposition")
-                        {
-                            var dispositions = response.Headers[key].Split(new char[] { ';' });
-                            if (dispositions.Length > 0)
-                            {
-                                foreach (var disposition in dispositions)
-                                {
-                                    var items = disposition.Split(new char[] { '=' });
-                                    if (items.Length >= 2)
-                                        dic.Add(items[0].Trim(), items[1].Replace("\"", ""));
-                                }
-                            }
-                            continue;
-                        }
-                        dic.Add(k, response.Headers[key]);
+                        StreamReader reader = new StreamReader(stream, Encoding.GetEncoding(REQUESTENCODING));
+                        data.Content = reader.ReadToEnd();
+                        reader.Dispose();
                     }
 
-                    data.Content = JsonHelper.Encode(dic);
-                    var responseStream = response.GetResponseStream();
-                    var mstream = new MemoryStream();
-                    responseStream.CopyTo(mstream);
-                    data.Stream = mstream;
-                    responseStream.Dispose();
-                    response.Close();
+                    LoggerFactory.GetLogger().Error(string.Format("{0}:{1}", url, data.Content));
+
                     return data;
                 }
-                catch (Exception ex)
+                //文件类型，处理文件
+                Dictionary<string, string> dic = new Dictionary<string, string>();
+                foreach (var key in response.Headers.AllKeys)
                 {
-                    LoggerFactory.GetLogger().Error(string.Format("HttpGet发生错误-{0}", url));
-                    throw ex;
+                    string _key = key.ToLower();
+                    var k = _key.Replace("-", "");
+                    //获取文件 content-disposition，主要用户Get时获取filename
+                    if (_key == "content-disposition")
+                    {
+                        var dispositions = response.Headers[key].Split(new char[] { ';' });
+                        if (dispositions.Length > 0)
+                        {
+                            foreach (var disposition in dispositions)
+                            {
+                                var items = disposition.Split(new char[] { '=' });
+                                if (items.Length >= 2)
+                                    dic.Add(items[0].Trim(), items[1].Replace("\"", ""));
+                            }
+                        }
+                        continue;
+                    }
+                    dic.Add(k, response.Headers[key]);
                 }
+
+                data.Content = JsonHelper.Encode(dic);
+                var responseStream = response.GetResponseStream();
+                var mstream = new MemoryStream();
+                responseStream.CopyTo(mstream);
+                data.Stream = mstream;
+                responseStream.Dispose();
+                response.Close();
+                return data;
             }
 
         }
@@ -405,8 +388,7 @@ namespace Api.Lanxin.Helpers
         /// <typeparam name="TResult"></typeparam>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static TResult Get<TResult>(string url)
-            where TResult : class
+        public static TResult Get<TResult>(string url) where TResult : class
         {
             return HttpGet.GetJsonResult<TResult>(url);
         }
@@ -420,9 +402,7 @@ namespace Api.Lanxin.Helpers
         /// <param name="url">发送的URL</param>
         /// <param name="t">数据实体</param>
         /// <returns></returns>
-        public static TResult Send<T, TResult>(string url, T t)
-            where T : class
-            where TResult : class
+        public static TResult Send<T, TResult>(string url, T t) where TResult : class
         {
             return HttpPost.GetJsonResult<T, TResult>(url, t);
         }

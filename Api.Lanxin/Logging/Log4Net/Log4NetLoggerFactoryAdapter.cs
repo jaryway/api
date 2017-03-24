@@ -19,14 +19,12 @@ namespace Api.Lanxin.Logging.Log4Net
         }
 
         /// <summary>
-        /// 构造函数 从web.config获取配置文件
+        /// 构造函数（默认加载"~/Config/log4net.config"作为log4net配置文件）
         /// </summary>
         public Log4NetLoggerFactoryAdapter()
+            : this("~/app_data/log4net.config")
         {
-            if (Log4NetLoggerFactoryAdapter.IsConfigured)
-                return;
-            XmlConfigurator.Configure();
-            Log4NetLoggerFactoryAdapter.IsConfigured = true;
+
         }
         /// <summary>
         /// 构造函数
@@ -45,15 +43,20 @@ namespace Api.Lanxin.Logging.Log4Net
         {
             if (Log4NetLoggerFactoryAdapter.IsConfigured)
                 return;
+            //IRunningEnvironment runningEnvironment = DIContainer.Resolve<IRunningEnvironment>();
             if (string.IsNullOrEmpty(configFilename))
                 configFilename = "~/app_data/log4net.config";
-
+            //FileInfo fileInfo = new FileInfo(WebUtility.GetPhysicalFilePath(configFilename));
             FileInfo fileInfo = new FileInfo(configFilename);
             if (!fileInfo.Exists)
                 throw new ApplicationException(string.Format("log4net配置文件 {0} 未找到", fileInfo.FullName));
-
+            //if (runningEnvironment.IsFullTrust)
+            //    XmlConfigurator.ConfigureAndWatch(fileInfo);
+            //else
+            //{
             XmlConfigurator.Configure(fileInfo);
             Log4NetLoggerFactoryAdapter.IsConfigured = true;
+            //}
         }
 
         /// <summary>
@@ -64,7 +67,9 @@ namespace Api.Lanxin.Logging.Log4Net
         public ILogger GetLogger(string loggerName)
         {
             if (logger == null)
+            {
                 logger = (ILogger)new Log4NetLogger(LogManager.GetLogger(loggerName));
+            }
             return logger;
         }
     }

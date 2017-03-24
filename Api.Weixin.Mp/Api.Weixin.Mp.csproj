@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DA79ADB4-03BD-443E-B00E-25AEFF19B1E1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Api.Weixin.Mp</RootNamespace>
+    <AssemblyName>Api.Weixin.Mp</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\net40\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\net40\Api.Weixin.Mp.xml</DocumentationFile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\net40\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\net40\Api.Weixin.Mp.XML</DocumentationFile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-net45|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\net45\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\net45\Api.Weixin.Mp.XML</DocumentationFile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-net45|AnyCPU'">
+    <OutputPath>bin\Release\net45\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Release\net45\Api.Weixin.Mp.XML</DocumentationFile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='Release'">
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)'=='Debug-net45' Or '$(Configuration)'=='Release-net45'">
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Api.Core, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Qianyun.Api.Core.1.1.0\lib\net40\Api.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiHelper.cs" />
+    <Compile Include="Messages\AddTemplateResult.cs" />
+    <Compile Include="Messages\CreateGroupResult.cs" />
+    <Compile Include="Messages\GetAccessTokenResult.cs" />
+    <Compile Include="Messages\GetCallbackIPResult.cs" />
+    <Compile Include="Messages\GetGroupIdByOpenIdResult.cs" />
+    <Compile Include="Messages\GetGroupListResult.cs" />
+    <Compile Include="Messages\GetKFListResult.cs" />
+    <Compile Include="Messages\GetMassMessageResult.cs" />
+    <Compile Include="Messages\GetMediaResult.cs" />
+    <Compile Include="Messages\GetShortUrlResult.cs" />
+    <Compile Include="Messages\GetUserInfoResult.cs" />
+    <Compile Include="Messages\GetUserListResult.cs" />
+    <Compile Include="Messages\SendKFMessageRequest.cs" />
+    <Compile Include="Messages\SendMassMessageResult.cs" />
+    <Compile Include="Messages\SendTemplateMessageRequest.cs" />
+    <Compile Include="Messages\SendTemplateMessageResult.cs" />
+    <Compile Include="Messages\UploadMediaNewsRequest.cs" />
+    <Compile Include="Messages\UploadMediaNewsResult.cs" />
+    <Compile Include="Messages\UploadMediaRequest.cs" />
+    <Compile Include="Messages\UploadMediaResult.cs" />
+    <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\KFMessage.cs" />
+    <Compile Include="TokenManager.cs" />
+    <Compile Include="Open\Messages\GetAuthorizerInfoResult.cs" />
+    <Compile Include="Open\Messages\GetAuthorizerOptionResult.cs" />
+    <Compile Include="Open\Messages\GetComponentAccessTokenResult.cs" />
+    <Compile Include="Open\Messages\GetComponentPreAuthCodeResult.cs" />
+    <Compile Include="Open\Messages\GetSNSAccessTokenResult.cs" />
+    <Compile Include="Open\Messages\GetUserInfoResult.cs" />
+    <Compile Include="Open\Messages\QueryComponentAuthResult.cs" />
+    <Compile Include="Open\Messages\RefreshAuthorizerTokenResult.cs" />
+    <Compile Include="Open\Messages\RefreshSNSAccessTokenResult.cs" />
+    <Compile Include="Open\Messages\SetAuthorizerOptionResult.cs" />
+    <Compile Include="Open\Models\funcscope_category.cs" />
+    <Compile Include="Open\OpenHelperExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Enums\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

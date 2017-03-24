@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Web.Helpers;
+using System.Web.Script.Serialization;
 
 namespace Api.Lanxin.Helpers
 {
@@ -32,7 +32,8 @@ namespace Api.Lanxin.Helpers
         /// <returns></returns>
         public static string Encode(object obj)
         {
-            string encode = Json.Encode(obj);
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            string encode = serializer.Serialize(obj);
             //解码Unicode，也可以通过设置App.Config（Web.Config）设置来做，这里只是暂时弥补一下，用到的地方不多
             MatchEvaluator evaluator = new MatchEvaluator(DecodeUnicode);
             //或：[\\u007f-\\uffff]，\对应为\u000a，但一般情况下会保持
@@ -42,15 +43,16 @@ namespace Api.Lanxin.Helpers
         /// <summary>
         /// 将 JavaScript 对象表示法 (JSON) 格式的数据转换为指定的强类型数据列表。
         /// </summary>
-        /// <typeparam name="T">必须是引用类型</typeparam>
-        /// <param name="jsonString"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="input"></param>
         /// <returns></returns>
-        public static T Decode<T>(string jsonString) where T : class
+        public static T Decode<T>(string input) where T : class
         {
             if (typeof(T) == typeof(string))
-                return jsonString as T;
+                return input as T;
 
-            return Json.Decode<T>(jsonString);
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            return serializer.Deserialize<T>(input);
         }
     }
 }
