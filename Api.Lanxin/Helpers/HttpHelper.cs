@@ -2,7 +2,6 @@
 using Api.Lanxin.Helpers;
 using Api.Lanxin.Logging;
 using Api.Lanxin.Models;
-using LogNet.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -168,9 +167,7 @@ namespace Api.Lanxin.Helpers
                 }
                 catch (Exception ex)
                 {
-                    var log = new Log4Neter();
-
-                    Log.Error(ex, "", "");
+                    LoggerFactory.GetLogger().Error(ex);
                     throw ex;
                 }
             }

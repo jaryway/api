@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Weixin.Qy", "Api.Weixin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Weixin.Mp", "Api.Weixin.Mp\Api.Weixin.Mp.csproj", "{DA79ADB4-03BD-443E-B00E-25AEFF19B1E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Demo.ConsoleApp", "Api.Demo.ConsoleApp\Api.Demo.ConsoleApp.csproj", "{FBF2346E-8700-4CCD-A31C-27093042D25C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Weixin.Pay", "Api.Weixin.Pay\Api.Weixin.Pay.csproj", "{B954579D-0AAE-4030-9258-A8E22A9FD9CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Weixin.Demo", "Api.Weixin.Demo\Api.Weixin.Demo.csproj", "{577A53F1-661C-4F4B-A312-F8E5AD7D478D}"
@@ -67,14 +65,6 @@ Global
 		{DA79ADB4-03BD-443E-B00E-25AEFF19B1E1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DA79ADB4-03BD-443E-B00E-25AEFF19B1E1}.Release-net45|Any CPU.ActiveCfg = Release-net45|Any CPU
 		{DA79ADB4-03BD-443E-B00E-25AEFF19B1E1}.Release-net45|Any CPU.Build.0 = Release-net45|Any CPU
-		{FBF2346E-8700-4CCD-A31C-27093042D25C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FBF2346E-8700-4CCD-A31C-27093042D25C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FBF2346E-8700-4CCD-A31C-27093042D25C}.Debug-net45|Any CPU.ActiveCfg = Debug|Any CPU
-		{FBF2346E-8700-4CCD-A31C-27093042D25C}.Debug-net45|Any CPU.Build.0 = Debug|Any CPU
-		{FBF2346E-8700-4CCD-A31C-27093042D25C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FBF2346E-8700-4CCD-A31C-27093042D25C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FBF2346E-8700-4CCD-A31C-27093042D25C}.Release-net45|Any CPU.ActiveCfg = Release|Any CPU
-		{FBF2346E-8700-4CCD-A31C-27093042D25C}.Release-net45|Any CPU.Build.0 = Release|Any CPU
 		{B954579D-0AAE-4030-9258-A8E22A9FD9CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B954579D-0AAE-4030-9258-A8E22A9FD9CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B954579D-0AAE-4030-9258-A8E22A9FD9CC}.Debug-net45|Any CPU.ActiveCfg = Debug|Any CPU
