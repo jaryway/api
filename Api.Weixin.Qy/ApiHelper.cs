@@ -472,18 +472,30 @@ namespace Api.Weixin.Qy
         #region OAuth2验证
 
         /// <summary>
-        /// OAuth2验证验证得到code后，在根据code或用户信息
+        /// OAuth2验证验证得到code后，再根据code或用户信息
         /// </summary>
         /// <param name="access_token"></param>
         /// <param name="code">code</param>
         /// <param name="agentId">agentId应用ID</param>
         /// <returns></returns>
+        [Obsolete("新版本中agentId参数已经不需要提供")]
         public OAuthGetUserInfoResult OAuthGetUserInfo(string access_token, string code, int agentId)
         {
             string url = string.Format("{0}user/getuserinfo?access_token={1}&code={2}&agentid={3}", baseUrl, access_token, code, agentId);
             return HttpHelper.HttpGet.GetJsonResult<OAuthGetUserInfoResult>(url);
         }
 
+        /// <summary>
+        /// OAuth2验证验证得到code后，再根据code或用户信息
+        /// </summary>
+        /// <param name="access_token"></param>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public OAuthGetUserInfoResult OAuthGetUserInfo(string access_token, string code)
+        {
+            string url = string.Format("{0}user/getuserinfo?access_token={1}&code={2}", baseUrl, access_token, code);
+            return HttpHelper.HttpGet.GetJsonResult<OAuthGetUserInfoResult>(url);
+        }
         #endregion
 
         #region jsapi
@@ -524,6 +536,24 @@ namespace Api.Weixin.Qy
             return HttpHelper.HttpPost.GetJsonResult<dynamic, GetLoginInfoResult>(url, new { auth_code = auth_code });
         }
 
+        #endregion
+
+        #region 获取身份验证URL
+        /// <summary>
+        /// 获取身份验证URL
+        /// </summary>
+        /// <param name="appid">企业的CorpID</param>
+        /// <param name="redirect_uri">授权后重定向的回调链接地址，请使用urlencode对链接进行处理</param>
+        /// <param name="state">重定向后会带上state参数，企业可以填写a-zA-Z0-9的参数值，长度不可超过128个字节</param>
+        /// <param name="response_type">返回类型，此时固定为：code</param>
+        /// <param name="scope">应用授权作用域，此时固定为：snsapi_base</param>
+        /// <returns></returns>
+        public static string AuthorizeUrl(string appid, string redirect_uri, string state, string response_type = "code", string scope = "snsapi_base")
+        {
+            return string.Format("https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type={2}&scope={3}&state={4}#wechat_redirect",
+                appid, redirect_uri, response_type, scope, state);
+
+        }
         #endregion
     }
 }
