@@ -3,8 +3,11 @@
 
 ## 如何使用
 1.引入核心文件Api.Core.dll
+
 2.引入相应的文件，如访问微信企业号API相关接口，就引入 Api.Weixin.Qy.dll文件；
+
 3.开始使用
+
 ```cs
 // a.获取access_token
 var access_token = TokenManager.Instance().
@@ -34,7 +37,9 @@ mp.ApiHelper.Instance().xxxxx ....
 
 ## 如何使用日志功能
 该类库使用的是基于log4net的日志功能，请现在Global文件中注册日志配置文件
+
 请参考[Demo](https://github.com/jaryway/api/tree/master/Api.Weixin.Demo)中的配置
+
 ``` cs
 
 protected void Application_Start()
@@ -59,8 +64,11 @@ protected void Application_Start()
     - TokenManager.cs     -- Token管理器实现
 ```
 ## 如何添加API方法
+
 1.在相应项目Messages/中添加Request类，如CreateUserRequest,写上对应的字段属性
+
 2.在ApiHelper中添加相应的方法
+
 ``` cs
 /// <summary>
 /// 创建成员
