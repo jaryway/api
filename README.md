@@ -20,6 +20,7 @@ ApiHelper.Instance().CreateUser(access_token, new Qy.CreateUserRequest
 });
 ```
 4.如何在一个类中同时使用多个类库，如在一个类中同时使用企业号和公众号的dll
+
 添加using前缀即可
 ``` cs
 using Api.Core;
