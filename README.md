@@ -1,4 +1,3 @@
-[![NPM version][npm-badge]][npm] [![Build Status][travis-ci-image]][travis-ci-url]
 
 [![Dependency Status][deps-badge]][deps]
 [![devDependency Status][dev-deps-badge]][dev-deps]
