@@ -1,8 +1,4 @@
 
-[![Dependency Status][deps-badge]][deps]
-[![devDependency Status][dev-deps-badge]][dev-deps]
-[![peerDependency Status][peer-deps-badge]][peer-deps]
-
 ## 企业号|公众号|钉钉|蓝信的API类库
 这是一个基于企业号|公众号|钉钉|蓝信开发文档开发的用于快速访问这些API的类库。
 
