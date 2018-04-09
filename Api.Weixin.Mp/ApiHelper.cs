@@ -20,7 +20,7 @@ namespace Api.Weixin.Mp
         /// <summary>
         /// 基础URL
         /// </summary>
-        const string baseUrl = "https://qyapi.weixin.qq.com/cgi-bin/";
+        const string baseUrl = "https://api.weixin.qq.com/";
         #endregion
 
         #region Instance
@@ -55,6 +55,19 @@ namespace Api.Weixin.Mp
         public GetAccessTokenResult GetAccessToken(string appId, string appSecret)
         {
             string url = string.Format("{0}cgi-bin/token?grant_type=client_credential&appid={1}&secret={2}", baseUrl, appId, appSecret);
+            return HttpHelper.HttpGet.GetJsonResult<GetAccessTokenResult>(url);
+        }
+        /// <summary>
+        /// 通过code换取网页授权access_token
+        /// </summary>
+        /// <param name="appId"></param>
+        /// <param name="appSecret"></param>
+        /// <param name="code">填写第一步获取的code参数</param>
+        /// <param name="grantType">填写为authorization_code</param>
+        /// <returns></returns>
+        public GetAccessTokenResult GetAccessToken(string appId, string appSecret, string code, string grantType = "authorization_code")
+        {
+            string url = string.Format("{0}sns/oauth2/access_token?appid={1}&secret={2}&code={3}&grant_type={4}", baseUrl, appId, appSecret, code, grantType);
             return HttpHelper.HttpGet.GetJsonResult<GetAccessTokenResult>(url);
         }
         /// <summary>
@@ -107,7 +120,7 @@ namespace Api.Weixin.Mp
         /// <returns></returns>
         public JsonResult AddKFAccount(string access_token, string kf_account, string nickname, string password)
         {
-            string url = string.Format("{0}customservice/kfaccount/add?access_token={1}", baseUrl, access_token);
+            string url = string.Format("{0}cgi-bin/customservice/kfaccount/add?access_token={1}", baseUrl, access_token);
             return HttpHelper.HttpPost.GetJsonResult<dynamic, JsonResult>(url, new { kf_account = kf_account, nickname = nickname, password = password });
         }
         /// <summary>
@@ -120,7 +133,7 @@ namespace Api.Weixin.Mp
         /// <returns></returns>
         public JsonResult UpdateKFAccount(string access_token, string kf_account, string nickname, string password)
         {
-            string url = string.Format("{0}customservice/kfaccount/update?access_token={1}", baseUrl, access_token);
+            string url = string.Format("{0}cgi-bin/customservice/kfaccount/update?access_token={1}", baseUrl, access_token);
             return HttpHelper.HttpPost.GetJsonResult<dynamic, JsonResult>(url, new { kf_account = kf_account, nickname = nickname, password = password });
         }
         /// <summary>
@@ -133,7 +146,7 @@ namespace Api.Weixin.Mp
         /// <returns></returns>
         public JsonResult DeleteKFAccount(string access_token, string kf_account, string nickname, string password)
         {
-            string url = string.Format("{0}customservice/kfaccount/del?access_token={1}", baseUrl, access_token);
+            string url = string.Format("{0}cgi-bin/customservice/kfaccount/del?access_token={1}", baseUrl, access_token);
             return HttpHelper.HttpPost.GetJsonResult<dynamic, JsonResult>(url, new { kf_account = kf_account, nickname = nickname, password = password });
         }
         /// <summary>
@@ -145,7 +158,7 @@ namespace Api.Weixin.Mp
         /// <returns></returns>
         public JsonResult UploadHeadImg(string access_token, string kf_account, PostMedia media)
         {
-            string url = string.Format("{0}customservice/kfaccount/uploadheadimg?access_token={1}&kf_account={2}", baseUrl, access_token, kf_account);
+            string url = string.Format("{0}cgi-bin/customservice/kfaccount/uploadheadimg?access_token={1}&kf_account={2}", baseUrl, access_token, kf_account);
             return JsonHelper.Decode<JsonResult>(HttpHelper.HttpPost.GetMediaResult(url, media));
         }
         /// <summary>
