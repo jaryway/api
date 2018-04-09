@@ -57,19 +57,7 @@ namespace Api.Weixin.Mp
             string url = string.Format("{0}cgi-bin/token?grant_type=client_credential&appid={1}&secret={2}", baseUrl, appId, appSecret);
             return HttpHelper.HttpGet.GetJsonResult<GetAccessTokenResult>(url);
         }
-        /// <summary>
-        /// 通过code换取网页授权access_token
-        /// </summary>
-        /// <param name="appId"></param>
-        /// <param name="appSecret"></param>
-        /// <param name="code">填写第一步获取的code参数</param>
-        /// <param name="grantType">填写为authorization_code</param>
-        /// <returns></returns>
-        public GetAccessTokenResult GetAccessToken(string appId, string appSecret, string code, string grantType = "authorization_code")
-        {
-            string url = string.Format("{0}sns/oauth2/access_token?appid={1}&secret={2}&code={3}&grant_type={4}", baseUrl, appId, appSecret, code, grantType);
-            return HttpHelper.HttpGet.GetJsonResult<GetAccessTokenResult>(url);
-        }
+
         /// <summary>
         /// 获取微信服务器IP地址
         /// </summary>
@@ -623,6 +611,35 @@ namespace Api.Weixin.Mp
         {
             string url = string.Format("{0}cgi-bin/shorturl?access_token={1}", baseUrl, access_token);
             return HttpHelper.Send<dynamic, GetShortUrlResult>(url, new { action = "long2short", long_url = long_url });
+        }
+        #endregion
+
+        #region 微信网页授权
+        /// <summary>
+        /// 通过code换取网页授权access_token
+        /// </summary>
+        /// <param name="appId"></param>
+        /// <param name="appSecret"></param>
+        /// <param name="code">填写第一步获取的code参数</param>
+        /// <param name="grantType">填写为authorization_code</param>
+        /// <returns></returns>
+        public GetSNSAccessTokenResult GetSNSAccessToken(string appId, string appSecret, string code, string grantType = "authorization_code")
+        {
+            string url = string.Format("{0}sns/oauth2/access_token?appid={1}&secret={2}&code={3}&grant_type={4}", baseUrl, appId, appSecret, code, grantType);
+            return HttpHelper.HttpGet.GetJsonResult<GetSNSAccessTokenResult>(url);
+        }
+
+        /// <summary>
+        /// 拉取用户信息(需scope为 snsapi_userinfo)
+        /// </summary>
+        /// <param name="access_token"></param>
+        /// <param name="openid"></param>
+        /// <param name="lang"></param>
+        /// <returns></returns>
+        public GetSNSUserInfoResult GetSNSUserInfo(string access_token, string openid, string lang = "zh_CN")
+        {
+            string url = string.Format("{0}sns/userinfo?access_token={1}&openid={2}&lang={3}", baseUrl, access_token, openid, lang);
+            return HttpHelper.HttpGet.GetJsonResult<GetSNSUserInfoResult>(url);
         }
         #endregion
     }

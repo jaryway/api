@@ -93,6 +93,7 @@
     <Compile Include="ApiHelper.cs" />
     <Compile Include="Messages\AddTemplateResult.cs" />
     <Compile Include="Messages\CreateGroupResult.cs" />
+    <Compile Include="Messages\GetSNSAccessTokenResult.cs" />
     <Compile Include="Messages\GetAccessTokenResult.cs" />
     <Compile Include="Messages\GetCallbackIPResult.cs" />
     <Compile Include="Messages\GetGroupIdByOpenIdResult.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Messages\GetMassMessageResult.cs" />
     <Compile Include="Messages\GetMediaResult.cs" />
     <Compile Include="Messages\GetShortUrlResult.cs" />
+    <Compile Include="Messages\GetSNSUserInfoResult.cs" />
     <Compile Include="Messages\GetUserInfoResult.cs" />
     <Compile Include="Messages\GetUserListResult.cs" />
     <Compile Include="Messages\SendKFMessageRequest.cs" />
